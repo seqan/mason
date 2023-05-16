@@ -49,7 +49,7 @@
 #include <seqan/align.h>
 #include <seqan/misc/interval_tree.h>
 
-#include "methylation_levels.h"
+#include <mason/methylation_levels.h>
 
 // ============================================================================
 // Forwards

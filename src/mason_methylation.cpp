@@ -39,8 +39,8 @@
 #include <seqan/seq_io.h>
 #include <seqan/arg_parse.h>
 
-#include "mason_options.h"
-#include "methylation_levels.h"
+#include <mason/mason_options.h>
+#include <mason/methylation_levels.h>
 
 // ==========================================================================
 // Classes

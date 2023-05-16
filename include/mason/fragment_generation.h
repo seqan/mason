@@ -51,8 +51,8 @@
 #include <seqan/sequence.h>
 #include <seqan/seq_io.h>
 
-#include "external_split_merge.h"
-#include "mason_options.h"
+#include <mason/external_split_merge.h>
+#include <mason/mason_options.h>
 
 // ============================================================================
 // Forwards

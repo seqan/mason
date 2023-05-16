@@ -32,7 +32,7 @@
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
 
-#include "sequencing.h"
+#include <mason/sequencing.h>
 
 // Maximal homopolymer length we will observe.
 const unsigned MAX_HOMOPOLYMER_LEN = 40;

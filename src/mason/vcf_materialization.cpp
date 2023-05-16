@@ -32,9 +32,9 @@
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
 
-#include "vcf_materialization.h"
+#include <mason/vcf_materialization.h>
 
-#include "mason_types.h"
+#include <mason/mason_types.h>
 
 // ----------------------------------------------------------------------------
 // Function contains()

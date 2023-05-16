@@ -32,7 +32,7 @@
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
 
-#include "genomic_variants.h"
+#include <mason/genomic_variants.h>
 
 std::ostream & operator<<(std::ostream & out, SnpRecord const & record)
 {

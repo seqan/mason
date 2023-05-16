@@ -49,9 +49,9 @@
 #include <seqan/sequence_journaled.h>
 #include <seqan/index.h>  // for Shape<>
 
-#include "mason_types.h"
-#include "variation_size_tsv.h"
-#include "genomic_variants.h"
+#include <mason/mason_types.h>
+#include <mason/variation_size_tsv.h>
+#include <mason/genomic_variants.h>
 
 // ==========================================================================
 // Forwards

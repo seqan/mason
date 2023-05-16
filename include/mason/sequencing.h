@@ -45,8 +45,8 @@
 #include <seqan/modifier.h>
 #include <seqan/sequence.h>
 
-#include "mason_options.h"
-#include "methylation_levels.h"
+#include <mason/mason_options.h>
+#include <mason/methylation_levels.h>
 
 // ============================================================================
 // Forwards

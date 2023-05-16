@@ -40,12 +40,12 @@
 #include <vector>
 #include <utility>
 
-#include "fragment_generation.h"
-#include "sequencing.h"
-#include "mason_options.h"
-#include "mason_types.h"
-#include "vcf_materialization.h"
-#include "external_split_merge.h"
+#include <mason/fragment_generation.h>
+#include <mason/sequencing.h>
+#include <mason/mason_options.h>
+#include <mason/mason_types.h>
+#include <mason/vcf_materialization.h>
+#include <mason/external_split_merge.h>
 
 // ==========================================================================
 // Classes

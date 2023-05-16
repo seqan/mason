@@ -41,8 +41,8 @@
 #include <seqan/seq_io.h>
 #include <seqan/vcf_io.h>
 
-#include "genomic_variants.h"
-#include "methylation_levels.h"
+#include <mason/genomic_variants.h>
+#include <mason/methylation_levels.h>
 
 // ============================================================================
 // Forwards

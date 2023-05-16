@@ -40,8 +40,8 @@
 #include <seqan/sequence_journaled.h>  // for the journal
 #include <seqan/random.h> // for beta distribution
 
-#include "mason_types.h"
-#include "mason_options.h"
+#include <mason/mason_types.h>
+#include <mason/mason_options.h>
 
 // ============================================================================
 // Forwards

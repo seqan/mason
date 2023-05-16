@@ -31,9 +31,37 @@
 // ==========================================================================
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
+// Contains the routines for simulating genomes.
+// ==========================================================================
 
-#include "simulate_genome.h"
-#include <random>
+// TODO(holtgrew): Allow simulation of Ns into genome.
+
+#ifndef APPS_MASON2_SIMULATE_GENOME_H_
+#define APPS_MASON2_SIMULATE_GENOME_H_
+
+#include <sstream>
+
+#include <seqan/sequence.h>
+#include <seqan/seq_io.h>
+
+#include <mason/mason_types.h>
+#include <mason/mason_options.h>
+
+// ============================================================================
+// Forwards
+// ============================================================================
+
+// ============================================================================
+// Tags, Classes, Enums
+// ============================================================================
+
+// ============================================================================
+// Metafunctions
+// ============================================================================
+
+// ============================================================================
+// Functions
+// ============================================================================
 
 // ----------------------------------------------------------------------------
 // Function simulateGenome()
@@ -43,71 +71,14 @@
 //
 // The resulting sequence is written to stream.
 
-int simulateGenome(seqan2::SeqFileOut & stream, MasonSimulateGenomeOptions const & options)
-{
-    // Initialize std generator and distribution
-    std::mt19937 generator(options.seed);
-    std::uniform_real_distribution<double> distribution(0, 1);
-    auto randomNumber = std::bind ( distribution, generator );
-
-    seqan2::CharString id;
-    seqan2::Dna5String contig;
-
-    for (unsigned i = 0; i < length(options.contigLengths); ++i)
-    {
-        clear(id);
-        clear(contig);
-
-        std::stringstream ss;
-        ss << (i + 1);
-        id = ss.str();
-
-        std::cerr << "contig " << id << " ...";
-
-        for (int64_t j = 0; j < options.contigLengths[i];)
-        {
-            double x = randomNumber();
-            if (x < 0.25)
-                appendValue(contig, 'A');
-            else if (x < 0.5)
-                appendValue(contig, 'C');
-            else if (x < 0.75)
-                appendValue(contig, 'G');
-            else if (x < 1.0)
-                appendValue(contig, 'T');
-            else
-                continue;  // Redraw.
-            ++j;
-        }
-
-        try
-        {
-            writeRecord(stream, id, contig);
-        }
-        catch (seqan2::IOError const & ioErr)
-        {
-            std::cerr << "\nERROR: Could not write contig " << id << " to output file.\n";
-            return 1;
-        }
-
-        std::cerr << " DONE\n";
-    }
-
-    return 0;
-}
+int simulateGenome(seqan2::SeqFileOut & stream, MasonSimulateGenomeOptions const & options);
 
 // ----------------------------------------------------------------------------
 // Function simulateGenome()
 // ----------------------------------------------------------------------------
 
-int simulateGenome(char const * filename, MasonSimulateGenomeOptions const & options)
-{
-    seqan2::SeqFileOut stream;
-    if (!open(stream, filename))
-    {
-        std::cerr << "ERROR: Could not open " << filename << "for writing!\n";
-        return 1;
-    }
+// Open the file with the given name in a SeqFileOut and then call the simulateGenome function from above.
 
-    return simulateGenome(stream, options);
-}
+int simulateGenome(char const * filename, MasonSimulateGenomeOptions const & options);
+
+#endif  // #ifndef APPS_MASON2_SIMULATE_GENOME_H_

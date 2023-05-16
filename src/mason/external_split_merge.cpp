@@ -32,7 +32,7 @@
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
 
-#include "external_split_merge.h"
+#include <mason/external_split_merge.h>
 
 // ---------------------------------------------------------------------------
 // Function IdSplitter::open()

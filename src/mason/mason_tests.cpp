@@ -37,8 +37,8 @@
 
 #include <seqan/basic.h>
 
-#include "sequencing.h"
-#include "genomic_variants.h"
+#include <mason/sequencing.h>
+#include <mason/genomic_variants.h>
 
 SEQAN_DEFINE_TEST(mason_tests_append_orientation_elementary_operations)
 {

@@ -55,7 +55,7 @@
 #include <seqan/gff_io.h>
 #include <seqan/vcf_io.h>
 
-#include "mason_types.h"
+#include <mason/mason_types.h>
 
 // ============================================================================
 // Forwards

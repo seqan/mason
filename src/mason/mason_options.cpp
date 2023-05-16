@@ -32,7 +32,7 @@
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
 
-#include "mason_options.h"
+#include <mason/mason_options.h>
 
 // ----------------------------------------------------------------------------
 // Function getYesNoStr()

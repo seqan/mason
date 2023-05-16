@@ -52,7 +52,7 @@
 #include <seqan/bam_io.h>
 #include <seqan/seq_io.h>
 
-#include "mason_types.h"
+#include <mason/mason_types.h>
 
 // ============================================================================
 // Forwards

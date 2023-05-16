@@ -27,34 +27,23 @@ if (NOT TARGET mason_interface)
     add_library ("mason_interface" INTERFACE)
     target_link_libraries ("mason_interface" INTERFACE seqan2::seqan2)
     target_link_libraries ("mason_interface" INTERFACE OpenMP::OpenMP_CXX)
+    target_include_directories ("mason_interface" INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include")
     target_compile_options ("mason_interface" INTERFACE "-pedantic" "-Wall" "-Wextra" "-flto=auto")
     target_compile_definitions ("mason_interface" INTERFACE SEQAN_APP_VERSION="${CMAKE_PROJECT_VERSION}")
 endif ()
 
 # We define a library for the reusable parts of Mason.
 add_library (mason_sim STATIC
-             src/external_split_merge.cpp
-             src/external_split_merge.h
-             src/fragment_generation.h
-             src/genomic_variants.cpp
-             src/genomic_variants.h
-             src/individual_genome.h
-             src/mason_options.cpp
-             src/mason_options.h
-             src/mason_types.h
-             src/methylation_levels.cpp
-             src/methylation_levels.h
-             src/omp_wrapper.h
-             src/sequencing.h
-             src/simulate_454.cpp
-             src/simulate_base.cpp
-             src/simulate_genome.cpp
-             src/simulate_genome.h
-             src/simulate_illumina.cpp
-             src/simulate_sanger.cpp
-             src/variation_size_tsv.h
-             src/vcf_materialization.cpp
-             src/vcf_materialization.h
+             src/mason/external_split_merge.cpp
+             src/mason/genomic_variants.cpp
+             src/mason/mason_options.cpp
+             src/mason/methylation_levels.cpp
+             src/mason/simulate_454.cpp
+             src/mason/simulate_base.cpp
+             src/mason/simulate_genome.cpp
+             src/mason/simulate_illumina.cpp
+             src/mason/simulate_sanger.cpp
+             src/mason/vcf_materialization.cpp
 )
 target_link_libraries (mason_sim mason_interface)
 
@@ -88,9 +77,9 @@ target_link_libraries (mason_splicing mason_sim)
 
 # Tests for some of the library functionality.
 enable_testing ()
-add_executable (mason_tests src/mason_tests.cpp)
+add_executable (mason_tests src/mason/mason_tests.cpp)
 target_link_libraries (mason_tests mason_sim)
-add_test (mason_tests mason_tests)
+add_test (mason_tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/mason_tests)
 add_test (NAME app_test_mason COMMAND python ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py ${CMAKE_SOURCE_DIR}
                                       ${CMAKE_BINARY_DIR}
 )

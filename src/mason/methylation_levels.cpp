@@ -32,7 +32,7 @@
 // Author: Manuel Holtgrewe <manuel.holtgrewe@fu-berlin.de>
 // ==========================================================================
 
-#include "methylation_levels.h"
+#include <mason/methylation_levels.h>
 
 // ----------------------------------------------------------------------------
 // Function VariantMaterializer::_fixVariationLevels()

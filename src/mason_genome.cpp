@@ -39,7 +39,7 @@
 
 #include <seqan/arg_parse.h>
 
-#include "simulate_genome.h"
+#include <mason/simulate_genome.h>
 
 // ==========================================================================
 // Classes

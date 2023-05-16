@@ -40,9 +40,9 @@
 
 #include <seqan/arg_parse.h>
 
-#include "mason_types.h"
-#include "mason_options.h"
-#include "sequencing.h"
+#include <mason/mason_types.h>
+#include <mason/mason_options.h>
+#include <mason/sequencing.h>
 
 // ==========================================================================
 // Classes
