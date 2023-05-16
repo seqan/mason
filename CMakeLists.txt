@@ -6,8 +6,16 @@
 # -----------------------------------------------------------------------------------------------------
 cmake_minimum_required (VERSION 3.15.0)
 
-project (seqan_apps_mason2 CXX)
-set (SEQAN_APP_VERSION "2.0.10")
+project (mason
+         LANGUAGES CXX
+         VERSION 2.0.10
+         DESCRIPTION "Mason -- Tools for Biological Sequence Simulation"
+         HOMEPAGE_URL "https://github.com/seqan/mason"
+)
+
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # ----------------------------------------------------------------------------
 # Dependencies
@@ -15,13 +23,21 @@ set (SEQAN_APP_VERSION "2.0.10")
 find_package (OpenMP)
 find_package (SeqAn2 REQUIRED HINTS lib)
 
+if (NOT TARGET mason_interface)
+    add_library ("mason_interface" INTERFACE)
+    target_link_libraries ("mason_interface" INTERFACE seqan2::seqan2)
+    target_link_libraries ("mason_interface" INTERFACE OpenMP::OpenMP_CXX)
+    target_compile_options ("mason_interface" INTERFACE "-pedantic" "-Wall" "-Wextra" "-flto=auto")
+    target_compile_definitions ("mason_interface" INTERFACE SEQAN_APP_VERSION="${CMAKE_PROJECT_VERSION}")
+endif ()
+
 # We define a library for the reusable parts of Mason.
-add_library (mason_sim
-             src/external_split_merge.h
+add_library (mason_sim STATIC
              src/external_split_merge.cpp
+             src/external_split_merge.h
              src/fragment_generation.h
-             src/genomic_variants.h
              src/genomic_variants.cpp
+             src/genomic_variants.h
              src/individual_genome.h
              src/mason_options.cpp
              src/mason_options.h
@@ -38,8 +54,9 @@ add_library (mason_sim
              src/simulate_sanger.cpp
              src/variation_size_tsv.h
              src/vcf_materialization.cpp
-             src/vcf_materialization.h)
-target_link_libraries (mason_sim seqan2::seqan2)
+             src/vcf_materialization.h
+)
+target_link_libraries (mason_sim mason_interface)
 
 # Simulate random genomes.
 add_executable (mason_genome src/mason_genome.cpp)
@@ -69,18 +86,14 @@ target_link_libraries (mason_simulator mason_sim)
 add_executable (mason_splicing src/mason_splicing.cpp)
 target_link_libraries (mason_splicing mason_sim)
 
-
-
-
 # Tests for some of the library functionality.
-enable_testing()
+enable_testing ()
 add_executable (mason_tests src/mason_tests.cpp)
 target_link_libraries (mason_tests mason_sim)
-add_test(mason_tests mason_tests)
-add_test(NAME app_test_mason
-        COMMAND python
-                ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py
-                ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
+add_test (mason_tests mason_tests)
+add_test (NAME app_test_mason COMMAND python ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py ${CMAKE_SOURCE_DIR}
+                                      ${CMAKE_BINARY_DIR}
+)
 
 # Install Mason binaries in ${PREFIX}/bin directory
 install (TARGETS mason_genome
@@ -90,7 +103,8 @@ install (TARGETS mason_genome
                  mason_materializer
                  mason_simulator
                  mason_splicing
-         DESTINATION ${CMAKE_INSTALL_BINDIR})
+         RUNTIME
+)
 
 # Install non-binary files for the package to "." for app builds and
 # ${PREFIX}/share/doc/mason2 for SeqAn release builds.
@@ -103,7 +117,6 @@ install (FILES LICENSE
                README.mason_simulator
                README.mason_splicing
                README.mason_variator
-         DESTINATION ${CMAKE_INSTALL_DATA_DIR}/doc/mason2})
-install (FILES example/adeno_virus.fa
-         DESTINATION ${CMAKE_INSTALL_DATA_DIR}/doc/mason2/example)
-
+               example/adeno_virus.fa
+         TYPE DOC
+)
