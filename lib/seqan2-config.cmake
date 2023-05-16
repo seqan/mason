@@ -16,7 +16,7 @@ find_package (ZLIB REQUIRED)
 find_package (BZip2 REQUIRED)
 
 add_library (seqan2 INTERFACE)
-target_include_directories (seqan2 INTERFACE SYSTEM ${CMAKE_CURRENT_LIST_DIR}/seqan/include)
+target_include_directories (seqan2 SYSTEM INTERFACE ${CMAKE_CURRENT_LIST_DIR}/seqan/include)
 if (OpenMP_FOUND)
     target_link_libraries (seqan2 INTERFACE OpenMP::OpenMP_CXX)
     target_compile_definitions (seqan2 INTERFACE -DSEQAN_HAS_OPENMP)
