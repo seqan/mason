@@ -11,16 +11,24 @@ if (TARGET seqan2::seqan2)
     return ()
 endif ()
 
+# Optional for SeqAn2, need to be found before configuring SeqAn2
 find_package (OpenMP QUIET)
-find_package (ZLIB REQUIRED)
-find_package (BZip2 REQUIRED)
+find_package (ZLIB QUIET REQUIRED)
+find_package (BZip2 QUIET REQUIRED)
 
+# Find SeqAn2, needs 2 variables set
+set (SeqAn_DIR "${CMAKE_CURRENT_LIST_DIR}/seqan/util/cmake")
+set (SEQAN_INCLUDE_PATH "${CMAKE_CURRENT_LIST_DIR}/seqan/include")
+find_package (SeqAn QUIET REQUIRED)
+
+# Define a SeqAn2 interface
 add_library (seqan2 INTERFACE)
-target_include_directories (seqan2 SYSTEM INTERFACE ${CMAKE_CURRENT_LIST_DIR}/seqan/include)
-if (OpenMP_FOUND)
+target_include_directories (seqan2 SYSTEM INTERFACE ${SEQAN_INCLUDE_DIRS})
+string (STRIP ${SEQAN_CXX_FLAGS} SEQAN_CXX_FLAGS) # SEQAN_CXX_FLAGS may have a leading whitespace
+target_compile_options (seqan2 INTERFACE ${SEQAN_CXX_FLAGS})
+target_compile_definitions (seqan2 INTERFACE ${SEQAN_DEFINITIONS})
+target_link_libraries (seqan2 INTERFACE ${SEQAN_LIBRARIES})
+if (OpenMP_FOUND) # SeqAn2 does not link something
     target_link_libraries (seqan2 INTERFACE OpenMP::OpenMP_CXX)
-    target_compile_definitions (seqan2 INTERFACE -DSEQAN_HAS_OPENMP)
 endif ()
-target_link_libraries (seqan2 INTERFACE ZLIB::ZLIB BZip2::BZip2)
-target_compile_definitions (seqan2 INTERFACE -DSEQAN_HAS_ZLIB -DSEQAN_HAS_BZIP2)
 add_library (seqan2::seqan2 ALIAS seqan2)
