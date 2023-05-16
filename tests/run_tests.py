@@ -35,15 +35,15 @@ def main(source_base, binary_base):
     # ============================================================
 
     path_to_genome = app_tests.autolocateBinary(
-      binary_base, 'bin', 'mason_genome')
+      binary_base, 'mason_genome')
     path_to_methylation = app_tests.autolocateBinary(
-      binary_base, 'bin', 'mason_methylation')
+      binary_base, 'mason_methylation')
     path_to_variator = app_tests.autolocateBinary(
-      binary_base, 'bin', 'mason_variator')
+      binary_base, 'mason_variator')
     path_to_materializer = app_tests.autolocateBinary(
-      binary_base, 'bin', 'mason_materializer')
+      binary_base, 'mason_materializer')
     path_to_simulator = app_tests.autolocateBinary(
-      binary_base, 'bin', 'mason_simulator')
+      binary_base, 'mason_simulator')
 
     libcpp = ('CC' in os.environ and 'gcc' in os.environ["CC"]) or sys.platform == "linux" or sys.platform == "linux2"
 
