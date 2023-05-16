@@ -20,13 +20,11 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 # ----------------------------------------------------------------------------
 # Dependencies
 # ----------------------------------------------------------------------------
-find_package (OpenMP)
-find_package (SeqAn2 REQUIRED HINTS lib)
+find_package (SeqAn2 REQUIRED PATHS lib)
 
 if (NOT TARGET mason_interface)
     add_library ("mason_interface" INTERFACE)
     target_link_libraries ("mason_interface" INTERFACE seqan2::seqan2)
-    target_link_libraries ("mason_interface" INTERFACE OpenMP::OpenMP_CXX)
     target_include_directories ("mason_interface" INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include")
     target_compile_options ("mason_interface" INTERFACE "-pedantic" "-Wall" "-Wextra" "-flto=auto")
     target_compile_definitions ("mason_interface" INTERFACE SEQAN_APP_VERSION="${CMAKE_PROJECT_VERSION}")
