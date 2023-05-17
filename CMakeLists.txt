@@ -92,7 +92,8 @@ add_test (mason_tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/mason_tests)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11
     OR CMAKE_CXX_COMPILER_ID STREQUAL "IntelLLVM"
-    OR CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+    OR CMAKE_CXX_COMPILER_ID STREQUAL "Intel"
+    OR CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     message("Skipping test - known incompatibles with some older compilers")
 else()
     add_test (NAME app_test_mason
