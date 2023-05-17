@@ -22,22 +22,22 @@ Table of Contents
 Mason is a collection of tools for the simulation of biological sequences.
 The collection consists of the following tools.
  * `mason_frag_sequencing`:
-       Simulation of fragment sampling from a genome ([documentation](https://github.com/seqan/mason/blob/doc/convert_readmes/README.mason_frag_sequencing.md)).
+       Simulation of fragment sampling from a genome ([documentation](README.mason_frag_sequencing.md)).
  * `mason_genome`:
-       Simulation of random genomic sequences ([documentation]()).
+       Simulation of random genomic sequences ([documentation](README.mason_genome.md)).
  * `mason_materializer`:
-       Apply the variation from a VCF file to a genome in a FASTA file ([documentation]()).
+       Apply the variation from a VCF file to a genome in a FASTA file ([documentation](README.mason_materializer.md)).
  * `mason_methylation`:
        Simulate methylation levels for a genome dependent on the context for
-       each possible site ([documentation]()).
+       each possible site ([documentation](README.mason_methylation.md)).
  * `mason_simulator`:
        Simulate NGS reads given a genome and optionally also a VCF file with
-       variants for a given donor to use as the source ([documentation]()).
+       variants for a given donor to use as the source ([documentation](README.mason_simulator.md)).
  * `mason_splicing`: Compute the transcriptome from a genome FASTA file and a GFF file with
-       the genes ([documentation]()).
+       the genes ([documentation](README.mason_splicing.md)).
  * `mason_variator`: Simulate SNPs, small indels, and structural variants for genomic data.
        The result is written out as a VCF file. Optionally, the resulting
-       modified sequence can also be written out ([documentation]()).
+       modified sequence can also be written out ([documentation](README.mason_variator)).
 
 ------------------------------------------------------------------------------
 2 Examples
