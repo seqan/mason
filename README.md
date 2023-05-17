@@ -1,4 +1,5 @@
 # Mason
+This tool is build on top of the **[SeqAn Project](https://www.seqan.de/)**.
 * **Description**: Tools for Biological Sequence Simulation
 * **Version**: 2.0.10
 * **Date**: February, 2014
