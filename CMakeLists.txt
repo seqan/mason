@@ -26,11 +26,18 @@ if (NOT TARGET mason_interface)
     add_library ("mason_interface" INTERFACE)
     target_link_libraries ("mason_interface" INTERFACE seqan2::seqan2)
     target_include_directories ("mason_interface" INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include")
-    target_compile_options ("mason_interface" INTERFACE "-pedantic" "-Wall" "-Wextra" "-flto=auto")
+    target_compile_options ("mason_interface" INTERFACE)
+    target_link_options ("mason_interface" INTERFACE)
     # This warning is suppressed in SeqAn2, but #pragma GCC diagnostic takes no effect with LTO (bug)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_compile_options ("mason_interface" INTERFACE "-Wextra" "-flto=auto" "-Wpedantic" "-Wall")
+        target_link_options ("mason_interface" INTERFACE "-Wno-alloc-size-larger-than" "-flto=auto")
+    endif ()
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        target_compile_options ("mason_interface" INTERFACE "-Wextra" "-Wpedantic" "-Wall")
         target_link_options ("mason_interface" INTERFACE "-Wno-alloc-size-larger-than")
     endif ()
+
     target_compile_definitions ("mason_interface" INTERFACE SEQAN_APP_VERSION="${CMAKE_PROJECT_VERSION}")
 endif ()
 
@@ -82,9 +89,19 @@ enable_testing ()
 add_executable (mason_tests src/mason/mason_tests.cpp)
 target_link_libraries (mason_tests mason_sim)
 add_test (mason_tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/mason_tests)
-add_test (NAME app_test_mason COMMAND python ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py ${CMAKE_SOURCE_DIR}
-                                      ${CMAKE_BINARY_DIR}
-)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11
+    OR CMAKE_CXX_COMPILER_ID STREQUAL "IntelLLVM"
+    OR CMAKE_CXX_COMPILER_ID STREQUAL "Intel"
+    OR CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    message("Skipping test - known incompatibles with some older compilers")
+else()
+    add_test (NAME app_test_mason
+              COMMAND python ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py
+                             ${CMAKE_SOURCE_DIR}
+                             ${CMAKE_BINARY_DIR}
+    )
+endif()
 
 # Install Mason binaries in ${PREFIX}/bin directory
 install (TARGETS mason_genome

@@ -24,7 +24,7 @@ find_package (SeqAn QUIET REQUIRED)
 # Define a SeqAn2 interface
 add_library (seqan2 INTERFACE)
 target_include_directories (seqan2 SYSTEM INTERFACE ${SEQAN_INCLUDE_DIRS})
-string (STRIP ${SEQAN_CXX_FLAGS} SEQAN_CXX_FLAGS) # SEQAN_CXX_FLAGS may have a leading whitespace
+string (STRIP "${SEQAN_CXX_FLAGS}" SEQAN_CXX_FLAGS) # SEQAN_CXX_FLAGS may have a leading whitespace
 target_compile_options (seqan2 INTERFACE ${SEQAN_CXX_FLAGS})
 target_compile_definitions (seqan2 INTERFACE ${SEQAN_DEFINITIONS})
 target_link_libraries (seqan2 INTERFACE ${SEQAN_LIBRARIES})
