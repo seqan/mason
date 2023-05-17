@@ -83,9 +83,16 @@ enable_testing ()
 add_executable (mason_tests src/mason/mason_tests.cpp)
 target_link_libraries (mason_tests mason_sim)
 add_test (mason_tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/mason_tests)
-add_test (NAME app_test_mason COMMAND python ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py ${CMAKE_SOURCE_DIR}
-                                      ${CMAKE_BINARY_DIR}
-)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11)
+    message("Skipping test - known incompatibles with some older compilers")
+else()
+    add_test (NAME app_test_mason
+              COMMAND python ${CMAKE_CURRENT_LIST_DIR}/tests/run_tests.py
+                             ${CMAKE_SOURCE_DIR}
+                             ${CMAKE_BINARY_DIR}
+    )
+endif()
 
 # Install Mason binaries in ${PREFIX}/bin directory
 install (TARGETS mason_genome
