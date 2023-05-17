@@ -60,3 +60,10 @@ VCF file:
 ```
   $ mason_simulator -ir adeno_virus.fa -n 100 -o left.fq -or right.fq
 ```
+
+## Changelog
+### main
+ * Extracted mason from the [SeqAn2](https://github.com/seqan/seqan/commit/8ce355dd960bbf7a5fa0292b49f7342f7e456da6) repository.
+ * Updated the READMEs
+### 2.0.10
+ * Original release
