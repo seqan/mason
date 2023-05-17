@@ -1,23 +1,11 @@
-                                    Mason
-                   Tools for Biological Sequence Simulation
+# Mason
+* **Description**: Tools for Biological Sequence Simulation
+* **Version**: 2.0.10
+* **Date**: February, 2014
+* **Author**: Manuel Holtgrewe
 
-                      http://www.seqan.de/projects/mason
-                              Version 2.0.10
-                                February, 2014
 
-                               Manuel Holtgrewe
-
-------------------------------------------------------------------------------
-Table of Contents
-------------------------------------------------------------------------------
-
-  1 Overview
-  2 Examples
-  3 Reference and Contact
-
-------------------------------------------------------------------------------
-1 Overview
-------------------------------------------------------------------------------
+## Overview
 
 Mason is a collection of tools for the simulation of biological sequences.
 The collection consists of the following tools.
@@ -39,15 +27,11 @@ The collection consists of the following tools.
        The result is written out as a VCF file. Optionally, the resulting
        modified sequence can also be written out ([documentation](README.mason_variator)).
 
-------------------------------------------------------------------------------
-2 Examples
-------------------------------------------------------------------------------
+## Examples
 
 The binaries `mason_*` can be found in the directory build directory.
 
-------------------------------------------------------------------------------
-2.1 Help
-------------------------------------------------------------------------------
+### Help
 
 Each program has a verbose built-in help that you can view using the `--help`
 option.  For example,
@@ -57,9 +41,7 @@ option.  For example,
 
 prints the help for Mason Genome.
 
-------------------------------------------------------------------------------
-2.1 Simulation of Variants and Reads
-------------------------------------------------------------------------------
+### Simulation of Variants and Reads
 
 In the following, we will give a quick example of how to simulate variants
 into a genome, write the variants into a VCF file and then use this VCF file
@@ -77,9 +59,3 @@ VCF file:
 ```
   $ mason_simulator -ir adeno_virus.fa -n 100 -o left.fq -or right.fq
 ```
-------------------------------------------------------------------------------
-3 Reference and Contact
-------------------------------------------------------------------------------
-
-In case of questions, problems or bugs, please contact us
-at https://github.com/seqan/mason
